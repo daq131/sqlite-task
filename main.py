@@ -13,11 +13,11 @@ def create_connection(db_file):
 
 # obiekt połączenia do bazy danych
 def execute_sql(conn, sql):
-   try:
+    try:
        c = conn.cursor()
        c.execute(sql)
-   except Error as e:
-       print(e)
+    except Error as e:(
+           print(e))
 # dodawanie danych
 def add_agent(conn, agent):
     sql = '''INSERT or REPLACE into agents(id, a_name, a_city)
@@ -72,25 +72,25 @@ def update(conn, table, id, **kwargs):
         print(e)
 
 def delete_where(conn, table, **kwargs):
-   qs = []
-   values = tuple()
-   for k, v in kwargs.items():
-       qs.append(f"{k}=?")
-       values += (v,)
-   q = " AND ".join(qs)
+    qs = []
+    values = tuple()
+    for k, v in kwargs.items():
+        qs.append(f"{k}=?")
+        values += (v,)
+    q = " AND ".join(qs)
 
-   sql = f'DELETE FROM {table} WHERE {q}'
-   cur = conn.cursor()
-   cur.execute(sql, values)
-   conn.commit()
-   print("Deleted")
+    sql = f'DELETE FROM {table} WHERE {q}'
+    cur = conn.cursor()
+    cur.execute(sql, values)
+    conn.commit()
+    print("Deleted")
 
 def delete_all(conn, table):
-   sql = f'DELETE FROM {table}'
-   cur = conn.cursor()
-   cur.execute(sql)
-   conn.commit()
-   print("Deleted")
+    sql = f'DELETE FROM {table}'
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+    print("Deleted")
 
 if __name__ == '__main__':
     # tworzymy tabele
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     );
    """
     create_customers_sql = """
-   CREATE TABLE IF NOT EXISTS customers(
+    CREATE TABLE IF NOT EXISTS customers(
        id integer PRIMARY KEY,
        agents_id INTEGER NOT NULL,
        c_name VARCHAR(40) NOT NULL,
@@ -144,5 +144,3 @@ if __name__ == '__main__':
         # cur = conn.execute("SELECT * FROM customers")
 
         conn.close()
-
-
